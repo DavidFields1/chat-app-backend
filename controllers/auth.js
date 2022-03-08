@@ -18,7 +18,7 @@ const createUser = async (req, res) => {
 		const salt = bcrypt.genSaltSync();
 		const hashedPassword = bcrypt.hashSync(password, salt);
 
-		// add encrypted password to req.body
+		// add encrypted password to user
 		const user = new User(req.body);
 		user.password = hashedPassword;
 
@@ -72,6 +72,8 @@ const loginUser = async (req, res) => {
 
 		// generate jwt
 		const token = await generateJwt(user.id);
+
+		// send response
 		res.status(200).json({
 			status: 200,
 			message: "User logged in successfully",
@@ -96,6 +98,7 @@ const renewToken = async (req, res) => {
 	// find user
 	const user = await User.findById(uid);
 
+	// send response
 	res.json({
 		status: 200,
 		message: "Token renewed",

@@ -1,14 +1,14 @@
-import { Schema, model } from "express-validator";
+const { Schema, model } = require("mongoose");
 
 const MessageSchema = new Schema(
 	{
 		from: {
-			type: Schema.types.ObjectId,
+			type: Schema.Types.ObjectId,
 			ref: "User",
 			required: true,
 		},
 		to: {
-			type: Schema.types.ObjectId,
+			type: Schema.Types.ObjectId,
 			ref: "User",
 			required: true,
 		},

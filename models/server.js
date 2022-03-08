@@ -36,6 +36,7 @@ class Server {
 
 		// API endopoints
 		this.app.use("/api/login", require("../router/auth"));
+		this.app.use("/api/messages", require("../router/messages"));
 	}
 
 	// the config could be a method or a property of the class
