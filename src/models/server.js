@@ -1,11 +1,11 @@
 // Servidor de Express
-const express = require("express");
-const http = require("http");
-const socketio = require("socket.io");
-const path = require("path");
-const cors = require("cors");
-const Sockets = require("./sockets");
-const dbConnection = require("../database/config");
+const express = require('express');
+const http = require('http');
+const socketio = require('socket.io');
+const path = require('path');
+const cors = require('cors');
+const Sockets = require('./sockets');
+const dbConnection = require('../database/config');
 
 class Server {
 	constructor() {
@@ -26,7 +26,7 @@ class Server {
 
 	middlewares() {
 		// deploy public
-		this.app.use(express.static(path.resolve(__dirname, "../public")));
+		this.app.use(express.static(path.resolve(__dirname, '../public')));
 
 		// cors
 		this.app.use(cors());
@@ -34,13 +34,13 @@ class Server {
 		// body parser
 		this.app.use(express.json());
 
-		// API endopoints
-		this.app.use("/api/login", require("../router/auth"));
-		this.app.use("/api/messages", require("../router/messages"));
+		// API endpoints
+		this.app.use('/api/login', require('../router/auth'));
+		this.app.use('/api/messages', require('../router/messages'));
 	}
 
 	// the config could be a method or a property of the class
-	configurarSockets() {
+	setupSockets() {
 		new Sockets(this.io);
 	}
 
@@ -49,11 +49,11 @@ class Server {
 		this.middlewares();
 
 		// init sockets
-		this.configurarSockets();
+		this.setupSockets();
 
 		// init Server
 		this.server.listen(this.port, () => {
-			console.log("Server running on port: ", this.port);
+			console.log('Server running on port: ', this.port);
 		});
 	}
 }

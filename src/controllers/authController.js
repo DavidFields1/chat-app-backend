@@ -1,6 +1,6 @@
-const bcrypt = require("bcryptjs");
-const User = require("../models/user");
-const { generateJwt } = require("../helpers/jwt");
+const bcrypt = require('bcryptjs');
+const User = require('../models/user');
+const { generateJwt } = require('../helpers/jwt');
 
 const createUser = async (req, res) => {
 	try {
@@ -10,7 +10,7 @@ const createUser = async (req, res) => {
 		if (uniqueEmail) {
 			return res.status(400).json({
 				status: 400,
-				message: "Email already exists",
+				message: 'Email already exists'
 			});
 		}
 
@@ -31,15 +31,15 @@ const createUser = async (req, res) => {
 		// send response
 		res.status(201).json({
 			status: 201,
-			message: "User created",
+			message: 'User created',
 			user: user,
-			token,
+			token
 		});
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({
 			status: 500,
-			message: "Internal server error",
+			message: 'Internal server error'
 		});
 	}
 };
@@ -55,7 +55,7 @@ const loginUser = async (req, res) => {
 		if (!user) {
 			return res.status(400).json({
 				status: 400,
-				message: "Email or password is incorrect",
+				message: 'Email or password is incorrect'
 			});
 		}
 
@@ -66,7 +66,7 @@ const loginUser = async (req, res) => {
 		if (!isPasswordValid) {
 			return res.status(400).json({
 				status: 400,
-				message: "Email or password is incorrect",
+				message: 'Email or password is incorrect'
 			});
 		}
 
@@ -76,15 +76,15 @@ const loginUser = async (req, res) => {
 		// send response
 		res.status(200).json({
 			status: 200,
-			message: "User logged in successfully",
+			message: 'User logged in successfully',
 			user: user,
-			token,
+			token
 		});
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({
 			status: 500,
-			message: "Internal server error",
+			message: 'Internal server error'
 		});
 	}
 };
@@ -101,14 +101,14 @@ const renewToken = async (req, res) => {
 	// send response
 	res.json({
 		status: 200,
-		message: "Token renewed",
+		message: 'Token renewed',
 		user: user,
-		token,
+		token
 	});
 };
 
 module.exports = {
 	createUser,
 	loginUser,
-	renewToken,
+	renewToken
 };

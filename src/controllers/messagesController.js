@@ -1,7 +1,7 @@
 const {
-	Types: { ObjectId },
-} = require("mongoose");
-const Message = require("../models/message");
+	Types: { ObjectId }
+} = require('mongoose');
+const Message = require('../models/message');
 
 const getMessages = async (req, res) => {
 	try {
@@ -14,30 +14,30 @@ const getMessages = async (req, res) => {
 		if (!isValidId) {
 			return res.status(400).json({
 				status: 400,
-				message: "Invalid user id",
+				message: 'Invalid user id'
 			});
 		}
 
 		const lastMessages = await Message.find({
 			$or: [
 				{ from: userId, to: toUserId },
-				{ from: toUserId, to: userId },
-			],
+				{ from: toUserId, to: userId }
+			]
 		})
-			.sort({ createdAt: "desc" })
+			.sort({ createdAt: 'desc' })
 			.limit(30);
 		console.log(lastMessages);
 		res.json({
 			status: 200,
-			message: lastMessages,
+			message: lastMessages
 		});
 	} catch (error) {
 		res.status(500).json({
-			message: "Server error",
+			message: 'Server error'
 		});
 	}
 };
 
 module.exports = {
-	getMessages,
+	getMessages
 };

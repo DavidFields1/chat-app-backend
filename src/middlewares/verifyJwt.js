@@ -1,13 +1,13 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 const verifyJwt = (req, res, next) => {
 	try {
-		const token = req.header("x-token");
+		const token = req.header('x-token');
 
 		if (!token) {
 			return res.status(401).json({
 				status: 401,
-				message: "Unauthorized",
+				message: 'Unauthorized'
 			});
 		}
 
@@ -18,11 +18,11 @@ const verifyJwt = (req, res, next) => {
 		console.log(error);
 		res.status(500).json({
 			status: 500,
-			message: "Internal server error",
+			message: 'Internal server error'
 		});
 	}
 };
 
 module.exports = {
-	verifyJwt,
+	verifyJwt
 };
