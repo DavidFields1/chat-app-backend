@@ -24,9 +24,8 @@ const getMessages = async (req, res) => {
 				{ from: toUserId, to: userId }
 			]
 		})
-			.sort({ createdAt: 'desc' })
+			.sort({ createdAt: -1 })
 			.limit(30);
-		console.log(lastMessages);
 		res.json({
 			status: 200,
 			message: lastMessages
